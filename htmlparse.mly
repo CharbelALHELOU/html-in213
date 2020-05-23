@@ -6,6 +6,7 @@
 
 %token <int> INT
 %token <string> STRING
+%token <string> TAG
 %token <string> CLASS
 %token PLUS MOINS DIV MULT
 %token H1 H2 H3 H4 H5 H6 DIV PAR BR IMG HLINK
@@ -32,13 +33,13 @@ expr:
   |STRING  { EString $1}
   | IMG LEFTPAR class_list COMMA STRING COMMA STRING RIGHTPAR { EImg($3,$5,$7)}
   | IMG LEFTPAR STRING COMMA STRING RIGHTPAR { EImg("",$3,$5)}
-  | tag LEFTBRACKET expr_seq RIGHTBRACKET { ETag($1,"","",$3)}
-  | tag LEFTPAR class_list RIGHTPAR LEFTBRACKET expr_seq RIGHTBRACKET {ETag($1,$3,"",$6)}
-  
+  | TAG LEFTBRACKET expr_seq RIGHTBRACKET { ETag($1,"","",$3)}
+  | TAG LEFTPAR class_list RIGHTPAR LEFTBRACKET expr_seq RIGHTBRACKET {ETag($1,$3,"",$6)}
+  | HLINK LEFTPAR STRING RIGHTPAR LEFTBRACKET expr_seq RIGHTBRACKET {EBR}
 
 expr_seq:
-  | expr expr_seq { Eseq($1,$2) }
-  | expr {$1}
+  | expr SEMICOLON expr_seq { Eseq($1,$3) }
+  | expr SEMICOLON {$1}
 
 tag :
   | H1 {"h1"}

@@ -18,7 +18,7 @@ let rec printval = function
   | Stringval s -> Printf.printf "%s" s
   | Brval -> Printf.printf "<br>"
   | Tagval b -> Printf.printf "\n<%s class='%s'>" b.tag b.c ; printval b.body ; Printf.printf "</%s>" b.tag
-  | Imgval i -> Printf.printf "<img class ='%s' src='%s' alt='%s' >" i.c i.src i.alt
+  | Imgval i -> Printf.printf "\n<img class ='%s' src='%s' alt='%s' >" i.c i.src i.alt
   | Linkval h -> Printf.printf "\n<a class='%s' href='%s'>" h.c h.link ; printval h.body ; Printf.printf "</a>"
   | Seqval (e1, e2) -> printval e1;Printf.printf " "; printval e2
 ;;

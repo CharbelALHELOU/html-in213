@@ -1,7 +1,6 @@
-BEGTITRE "hello" ENDTITRE;
-BEGSTITRE 2+3*5 ENDSTITRE;
-BEGDIV BEGP "hey !" ENDP BEGP "salut !" ENDP BEGP "resalut !" ENDP ENDDIV;
-IMG "machin.jpg" "machin";
-LINK "www.lien.fr" "cliques sur ce lien!";
-BR; 
-BEGBTN LINK "bouton.fr" "bouton" ENDBTN;
+div(fghj dfghj fghjk){
+    h1{"heyy"; } ;
+    p{"blahsh"; } ;
+};
+
+img("link","alt");
