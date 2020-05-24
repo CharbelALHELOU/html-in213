@@ -69,13 +69,14 @@ rule lex = parse
       { lex lexbuf }     (* on passe les espaces *)
   | ['0'-'9']+ as lxm
       { INT(int_of_string lxm) }
-  | [ 'A'-'Z' 'a'-'z' ] [ 'A'-'Z' 'a'-'z' '0'-'6' ]* as lxm
+  | [ 'A'-'Z' 'a'-'z' ] [ 'A'-'Z' 'a'-'z' '0'-'9' '-' '_']* as lxm
       { match lxm with
-          "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "section" | "p" -> TAG(lxm)
+          "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "section" | "p" | "div" -> TAG(lxm)
         | "br" -> BR
         | "img" -> IMG
         | "link" -> HLINK
         | "list" -> LIST
+        | "in" -> IN
         | _ -> CLASS(lxm)
         }
   | '.' [ 'A'-'Z' 'a'-'z' '0'-'6' ]* as lxm {IDENT(lxm)}

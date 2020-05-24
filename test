@@ -1,13 +1,33 @@
-/*div(fghj dfghj fghjk){
-    h1{"heyy"; } ;
-    p{"blahsh"; } ;
+.header{
+    div(row py-5 px-3){
+        div(col-md-8 my-auto text-center){
+            h1(text-center text-uppercase){"welcome this is test"; } ;
+        };
+        div(col-md-4 justify-content-center){
+            img(rounded-circle img-fluid,"francois.jpg","avatar");
+        };
+    };
+} in
+
+.navigation{
+    div(navbar navbar-default bg-dark){
+        div(navbar-header text-white){
+           div(navbar-brand){"IN213";};
+        };
+        list (nav navbar-nav flex-row justify-content-center)
+            ->(px-5 text-uppercase){link(text-white,"#"){"cours";};} 
+            ->(px-5 text-uppercase){link(text-white,"#"){"td";};} 
+            ->(px-5 text-uppercase){link(text-white,"#"){"contact";};} ;
+    };
+} in
+
+
+div(container-fluid p-0 justify-content-center bg-warning  vh-100){
+    .navigation;
+    .header; 
 };
 
-img("link","alt");
+;;
 
-link("asdfg"){
-    h1{"asdf:";};
-};
-*/
-
-list ->{ h1{"hey";} };
+// un ; apres CHAQUE COMMANDE 
+// les class entre para le contenu entre crochet, on peut ne pas mettre de classe en n'ajoutant pas de para

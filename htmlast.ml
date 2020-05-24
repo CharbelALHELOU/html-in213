@@ -1,18 +1,13 @@
-(* Ce fichier contient la d�finition du type OCaml des arbres de
- * syntaxe abstraite du langage, ainsi qu'un imprimeur des phrases
- * du langage.
-*)
 
 type expr =
-  | EInt of int                                 (* 1, 2, 3 *)
-  | EString of string                           (* "hello" *)
+  | EInt of int                                 
+  | EString of string  
+  | EIdent of string                         
   | EBR
   | ETag of ( string * string * string * expr )
   | EImg of ( string * string * string )
   | ELink of ( string * string * expr )
   | Eseq of (expr * expr )
-  | EList of (string * expr list)
+  | EList of (string * ((string * expr) list) )
+  | ELet of (string * expr * expr)
 ;;
-
-
-let rec print oc = Printf.printf "HEYYYYYYY";;
