@@ -2,6 +2,7 @@ type token =
   | INT of (int)
   | STRING of (string)
   | TAG of (string)
+  | IDENT of (string)
   | CLASS of (string)
   | PLUS
   | MOINS
@@ -18,6 +19,8 @@ type token =
   | IMG
   | HLINK
   | LINK
+  | LIST
+  | ARROW
   | SEMICOLON
   | RIGHTBRACKET
   | LEFTBRACKET

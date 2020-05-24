@@ -11,6 +11,7 @@ type expr =
   | EImg of ( string * string * string )
   | ELink of ( string * string * expr )
   | Eseq of (expr * expr )
+  | EList of (string * expr list)
 ;;
 
 

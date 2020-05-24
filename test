@@ -1,6 +1,13 @@
-div(fghj dfghj fghjk){
+/*div(fghj dfghj fghjk){
     h1{"heyy"; } ;
     p{"blahsh"; } ;
 };
 
 img("link","alt");
+
+link("asdfg"){
+    h1{"asdf:";};
+};
+*/
+
+list ->{ h1{"hey";} };

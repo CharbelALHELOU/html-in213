@@ -2,6 +2,7 @@ type token =
   | INT of (int)
   | STRING of (string)
   | TAG of (string)
+  | IDENT of (string)
   | CLASS of (string)
   | PLUS
   | MOINS
@@ -18,6 +19,8 @@ type token =
   | IMG
   | HLINK
   | LINK
+  | LIST
+  | ARROW
   | SEMICOLON
   | RIGHTBRACKET
   | LEFTBRACKET
@@ -30,92 +33,102 @@ let _ = parse_error;;
 # 2 "htmlparse.mly"
   open Htmlast;;
 
-# 34 "htmlparse.ml"
+# 37 "htmlparse.ml"
 let yytransl_const = [|
-  261 (* PLUS *);
-  262 (* MOINS *);
-  263 (* DIV *);
-  264 (* MULT *);
-  265 (* H1 *);
-  266 (* H2 *);
-  267 (* H3 *);
-  268 (* H4 *);
-  269 (* H5 *);
-  270 (* H6 *);
-  271 (* PAR *);
-  272 (* BR *);
-  273 (* IMG *);
-  274 (* HLINK *);
-  275 (* LINK *);
-  276 (* SEMICOLON *);
-  277 (* RIGHTBRACKET *);
-  278 (* LEFTBRACKET *);
-  279 (* LEFTPAR *);
-  280 (* RIGHTPAR *);
-  281 (* COMMA *);
+  262 (* PLUS *);
+  263 (* MOINS *);
+  264 (* DIV *);
+  265 (* MULT *);
+  266 (* H1 *);
+  267 (* H2 *);
+  268 (* H3 *);
+  269 (* H4 *);
+  270 (* H5 *);
+  271 (* H6 *);
+  272 (* PAR *);
+  273 (* BR *);
+  274 (* IMG *);
+  275 (* HLINK *);
+  276 (* LINK *);
+  277 (* LIST *);
+  278 (* ARROW *);
+  279 (* SEMICOLON *);
+  280 (* RIGHTBRACKET *);
+  281 (* LEFTBRACKET *);
+  282 (* LEFTPAR *);
+  283 (* RIGHTPAR *);
+  284 (* COMMA *);
     0|]
 
 let yytransl_block = [|
   257 (* INT *);
   258 (* STRING *);
   259 (* TAG *);
-  260 (* CLASS *);
+  260 (* IDENT *);
+  261 (* CLASS *);
     0|]
 
 let yylhs = "\255\255\
 \001\000\002\000\002\000\002\000\002\000\002\000\002\000\002\000\
-\002\000\004\000\004\000\005\000\005\000\005\000\005\000\005\000\
-\005\000\005\000\005\000\003\000\003\000\000\000"
+\002\000\002\000\004\000\004\000\006\000\006\000\006\000\006\000\
+\006\000\006\000\006\000\006\000\003\000\003\000\005\000\005\000\
+\000\000"
 
 let yylen = "\002\000\
 \002\000\001\000\001\000\001\000\008\000\006\000\004\000\007\000\
-\007\000\003\000\002\000\001\000\001\000\001\000\001\000\001\000\
-\001\000\001\000\001\000\002\000\001\000\002\000"
+\007\000\002\000\003\000\002\000\001\000\001\000\001\000\001\000\
+\001\000\001\000\001\000\001\000\002\000\001\000\005\000\000\000\
+\002\000"
 
 let yydefred = "\000\000\
 \000\000\000\000\002\000\004\000\000\000\003\000\000\000\000\000\
-\022\000\000\000\000\000\000\000\000\000\000\000\001\000\000\000\
-\000\000\000\000\000\000\000\000\000\000\000\000\000\000\007\000\
-\020\000\000\000\000\000\000\000\000\000\010\000\000\000\000\000\
-\000\000\000\000\000\000\006\000\000\000\000\000\008\000\000\000\
-\009\000\005\000"
+\000\000\025\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\010\000\001\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\000\000\000\000\000\000\007\000\021\000\000\000\000\000\000\000\
+\000\000\000\000\011\000\000\000\000\000\000\000\000\000\000\000\
+\000\000\006\000\000\000\000\000\023\000\008\000\000\000\009\000\
+\005\000"
 
 let yydgoto = "\002\000\
-\009\000\016\000\019\000\017\000\000\000"
+\010\000\019\000\022\000\020\000\017\000\000\000"
 
-let yysindex = "\005\000\
-\255\254\000\000\000\000\000\000\246\254\000\000\241\254\243\254\
-\000\000\000\255\255\254\017\255\003\255\020\255\000\000\004\255\
-\002\255\017\255\001\255\005\255\006\255\008\255\255\254\000\000\
-\000\000\007\255\024\255\025\255\011\255\000\000\255\254\010\255\
-\012\255\255\254\014\255\000\000\026\255\015\255\000\000\016\255\
-\000\000\000\000"
+let yysindex = "\013\000\
+\000\255\000\000\000\000\000\000\238\254\000\000\245\254\250\254\
+\002\255\000\000\003\255\000\255\022\255\004\255\026\255\005\255\
+\000\000\000\000\006\255\007\255\022\255\008\255\009\255\010\255\
+\012\255\000\255\000\255\000\000\000\000\011\255\030\255\031\255\
+\015\255\017\255\000\000\000\255\016\255\014\255\000\255\002\255\
+\020\255\000\000\032\255\021\255\000\000\000\000\019\255\000\000\
+\000\000"
 
 let yyrindex = "\000\000\
 \000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\243\254\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\000\000\000\000\000\000\000\000\251\254\000\000\000\000\000\000\
+\000\000\000\000\023\255\000\000\000\000\000\000\000\000\000\000\
+\000\000\000\000\000\000\000\000\000\000\000\000\000\000\243\254\
 \000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
-\000\000\250\254\000\000\000\000\000\000\000\000\018\255\000\000\
-\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
-\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
-\000\000\000\000"
+\000\000"
 
 let yygindex = "\000\000\
-\000\000\037\000\247\255\236\255\000\000"
+\000\000\255\255\247\255\233\255\008\000\000\000"
 
-let yytablesize = 40
-let yytable = "\003\000\
-\004\000\005\000\030\000\021\000\020\000\001\000\018\000\013\000\
-\025\000\014\000\035\000\011\000\012\000\038\000\006\000\007\000\
-\008\000\021\000\021\000\015\000\018\000\022\000\024\000\023\000\
-\026\000\032\000\033\000\040\000\031\000\027\000\028\000\029\000\
-\034\000\036\000\039\000\041\000\037\000\010\000\011\000\042\000"
+let yytablesize = 48
+let yytable = "\011\000\
+\003\000\004\000\005\000\035\000\024\000\023\000\012\000\013\000\
+\021\000\024\000\024\000\029\000\041\000\001\000\014\000\044\000\
+\006\000\007\000\008\000\015\000\009\000\022\000\022\000\016\000\
+\034\000\018\000\021\000\025\000\027\000\026\000\028\000\037\000\
+\038\000\047\000\030\000\036\000\031\000\032\000\033\000\039\000\
+\040\000\043\000\042\000\046\000\048\000\049\000\012\000\045\000"
 
-let yycheck = "\001\001\
-\002\001\003\001\023\000\013\000\002\001\001\000\004\001\023\001\
-\018\000\023\001\031\000\022\001\023\001\034\000\016\001\017\001\
-\018\001\024\001\025\001\020\001\004\001\002\001\021\001\020\001\
-\024\001\002\001\002\001\002\001\022\001\025\001\025\001\024\001\
-\022\001\024\001\021\001\021\001\025\001\001\000\021\001\024\001"
+let yycheck = "\001\000\
+\001\001\002\001\003\001\027\000\014\000\002\001\025\001\026\001\
+\005\001\023\001\024\001\021\000\036\000\001\000\026\001\039\000\
+\017\001\018\001\019\001\026\001\021\001\027\001\028\001\022\001\
+\026\000\023\001\005\001\002\001\023\001\025\001\024\001\002\001\
+\002\001\002\001\027\001\025\001\028\001\028\001\027\001\025\001\
+\024\001\028\001\027\001\024\001\024\001\027\001\024\001\040\000"
 
 let yynames_const = "\
   PLUS\000\
@@ -133,6 +146,8 @@ let yynames_const = "\
   IMG\000\
   HLINK\000\
   LINK\000\
+  LIST\000\
+  ARROW\000\
   SEMICOLON\000\
   RIGHTBRACKET\000\
   LEFTBRACKET\000\
@@ -145,6 +160,7 @@ let yynames_block = "\
   INT\000\
   STRING\000\
   TAG\000\
+  IDENT\000\
   CLASS\000\
   "
 
@@ -155,27 +171,27 @@ let yyact = [|
     Obj.repr(
 # 25 "htmlparse.mly"
                      ( _1 )
-# 159 "htmlparse.ml"
+# 175 "htmlparse.ml"
                : Htmlast.expr))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : int) in
     Obj.repr(
 # 31 "htmlparse.mly"
           ( EInt _1)
-# 166 "htmlparse.ml"
+# 182 "htmlparse.ml"
                : 'expr))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 32 "htmlparse.mly"
            ( EBR )
-# 172 "htmlparse.ml"
+# 188 "htmlparse.ml"
                : 'expr))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : string) in
     Obj.repr(
 # 33 "htmlparse.mly"
            ( EString _1)
-# 179 "htmlparse.ml"
+# 195 "htmlparse.ml"
                : 'expr))
 ; (fun __caml_parser_env ->
     let _3 = (Parsing.peek_val __caml_parser_env 5 : 'class_list) in
@@ -184,7 +200,7 @@ let yyact = [|
     Obj.repr(
 # 34 "htmlparse.mly"
                                                               ( EImg(_3,_5,_7))
-# 188 "htmlparse.ml"
+# 204 "htmlparse.ml"
                : 'expr))
 ; (fun __caml_parser_env ->
     let _3 = (Parsing.peek_val __caml_parser_env 3 : string) in
@@ -192,7 +208,7 @@ let yyact = [|
     Obj.repr(
 # 35 "htmlparse.mly"
                                              ( EImg("",_3,_5))
-# 196 "htmlparse.ml"
+# 212 "htmlparse.ml"
                : 'expr))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 3 : string) in
@@ -200,7 +216,7 @@ let yyact = [|
     Obj.repr(
 # 36 "htmlparse.mly"
                                           ( ETag(_1,"","",_3))
-# 204 "htmlparse.ml"
+# 220 "htmlparse.ml"
                : 'expr))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 6 : string) in
@@ -209,94 +225,115 @@ let yyact = [|
     Obj.repr(
 # 37 "htmlparse.mly"
                                                                       (ETag(_1,_3,"",_6))
-# 213 "htmlparse.ml"
+# 229 "htmlparse.ml"
                : 'expr))
 ; (fun __caml_parser_env ->
     let _3 = (Parsing.peek_val __caml_parser_env 4 : string) in
     let _6 = (Parsing.peek_val __caml_parser_env 1 : 'expr_seq) in
     Obj.repr(
 # 38 "htmlparse.mly"
-                                                                    (EBR)
-# 221 "htmlparse.ml"
+                                                                    (ELink(_3,"", _6))
+# 237 "htmlparse.ml"
+               : 'expr))
+; (fun __caml_parser_env ->
+    let _2 = (Parsing.peek_val __caml_parser_env 0 : 'list_items) in
+    Obj.repr(
+# 39 "htmlparse.mly"
+                    (EList("", _2))
+# 244 "htmlparse.ml"
                : 'expr))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : 'expr) in
     let _3 = (Parsing.peek_val __caml_parser_env 0 : 'expr_seq) in
     Obj.repr(
-# 41 "htmlparse.mly"
+# 42 "htmlparse.mly"
                             ( Eseq(_1,_3) )
-# 229 "htmlparse.ml"
+# 252 "htmlparse.ml"
                : 'expr_seq))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 1 : 'expr) in
     Obj.repr(
-# 42 "htmlparse.mly"
+# 43 "htmlparse.mly"
                    (_1)
-# 236 "htmlparse.ml"
+# 259 "htmlparse.ml"
                : 'expr_seq))
 ; (fun __caml_parser_env ->
     Obj.repr(
-# 45 "htmlparse.mly"
-       ("h1")
-# 242 "htmlparse.ml"
-               : 'tag))
-; (fun __caml_parser_env ->
-    Obj.repr(
 # 46 "htmlparse.mly"
-       ("h2")
-# 248 "htmlparse.ml"
+       ("h1")
+# 265 "htmlparse.ml"
                : 'tag))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 47 "htmlparse.mly"
-       ("h3")
-# 254 "htmlparse.ml"
+       ("h2")
+# 271 "htmlparse.ml"
                : 'tag))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 48 "htmlparse.mly"
-       ("h4")
-# 260 "htmlparse.ml"
+       ("h3")
+# 277 "htmlparse.ml"
                : 'tag))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 49 "htmlparse.mly"
-       ("h5")
-# 266 "htmlparse.ml"
+       ("h4")
+# 283 "htmlparse.ml"
                : 'tag))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 50 "htmlparse.mly"
-       ("h6")
-# 272 "htmlparse.ml"
+       ("h5")
+# 289 "htmlparse.ml"
                : 'tag))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 51 "htmlparse.mly"
-        ("div")
-# 278 "htmlparse.ml"
+       ("h6")
+# 295 "htmlparse.ml"
                : 'tag))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 52 "htmlparse.mly"
+        ("div")
+# 301 "htmlparse.ml"
+               : 'tag))
+; (fun __caml_parser_env ->
+    Obj.repr(
+# 53 "htmlparse.mly"
         ( "p" )
-# 284 "htmlparse.ml"
+# 307 "htmlparse.ml"
                : 'tag))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 1 : string) in
     let _2 = (Parsing.peek_val __caml_parser_env 0 : 'class_list) in
     Obj.repr(
-# 55 "htmlparse.mly"
+# 56 "htmlparse.mly"
                      ( String.concat " " [_1;_2] )
-# 292 "htmlparse.ml"
+# 315 "htmlparse.ml"
                : 'class_list))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : string) in
     Obj.repr(
-# 56 "htmlparse.mly"
+# 57 "htmlparse.mly"
           ( _1 )
-# 299 "htmlparse.ml"
+# 322 "htmlparse.ml"
                : 'class_list))
+; (fun __caml_parser_env ->
+    let _3 = (Parsing.peek_val __caml_parser_env 2 : 'expr) in
+    let _5 = (Parsing.peek_val __caml_parser_env 0 : 'list_items) in
+    Obj.repr(
+# 60 "htmlparse.mly"
+                                                   (_3::_5)
+# 330 "htmlparse.ml"
+               : 'list_items))
+; (fun __caml_parser_env ->
+    Obj.repr(
+# 61 "htmlparse.mly"
+       ([])
+# 336 "htmlparse.ml"
+               : 'list_items))
 (* Entry main *)
 ; (fun __caml_parser_env -> raise (Parsing.YYexit (Parsing.peek_val __caml_parser_env 0)))
 |]

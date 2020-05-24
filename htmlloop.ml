@@ -24,12 +24,12 @@ let main() =
   let lexbuf = Lexing.from_channel input_channel in
   while true do
     try
-      let _ = Printf.printf  "> %!" in
+      let _ = Printf.printf  " %!" in
       let e = Htmlparse.main Htmllex.lex lexbuf in
       let _ = Htmlsem.printval (Htmlsem.eval e) in
       Printf.printf "\n%!"
     with
-    | Htmllex.Eoi -> Printf.printf  "Bye bye.\n%!" ; exit 0
+    | Htmllex.Eoi -> Printf.printf  "\nBye bye.\n%!" ; exit 0
     | Failure msg -> Printf.printf "Erreur: %s\n\n" msg
     | Parsing.Parse_error -> Printf.printf "Erreur de syntaxe\n\n"
   done

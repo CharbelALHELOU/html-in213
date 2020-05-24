@@ -7,6 +7,7 @@ type htmlval =
   | Tagval of {tag:string; body: htmlval; c: string }
   | Imgval of {src:string; alt:string; c: string }
   | Linkval of {link:string; body:htmlval; c: string}
+  | Listval of {c:string ; items: htmlval list}
   | Seqval of (htmlval * htmlval)
 
 and environment = (string * htmlval) list
@@ -21,6 +22,12 @@ let rec printval = function
   | Imgval i -> Printf.printf "\n<img class ='%s' src='%s' alt='%s' >" i.c i.src i.alt
   | Linkval h -> Printf.printf "\n<a class='%s' href='%s'>" h.c h.link ; printval h.body ; Printf.printf "</a>"
   | Seqval (e1, e2) -> printval e1;Printf.printf " "; printval e2
+  | Listval l -> (
+    let rec aux=function
+    | h::t -> Printf.printf "<li>"; printval h;Printf.printf "</li>\n"; aux t;
+    | [] -> () in
+    Printf.printf "\n<ul class='%s'>\n" l.c ; aux l.items; Printf.printf "</ul>"
+  )
 ;;
 
 (* Environnement. *)
@@ -45,6 +52,12 @@ let rec eval e rho =
   | ELink (l,cl,e) -> Linkval {link = l; body = (eval e rho); c=cl}
   | ETag (t,cl,id,e) -> Tagval { tag = t; c = cl ; body = (eval e rho) }
   | Eseq (e1, e2) -> Seqval (eval e1 rho, eval e2 rho)
+  | EList (cl,l) -> (
+    let rec aux = function
+    | h::t -> (eval h rho)::(aux t)
+    | [] -> [] in
+    Listval {c = cl; items = (aux l)}
+  )
 ;;
 
 

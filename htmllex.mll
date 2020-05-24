@@ -75,13 +75,16 @@ rule lex = parse
         | "br" -> BR
         | "img" -> IMG
         | "link" -> HLINK
+        | "list" -> LIST
         | _ -> CLASS(lxm)
         }
+  | '.' [ 'A'-'Z' 'a'-'z' '0'-'6' ]* as lxm {IDENT(lxm)}
   | "{" { LEFTBRACKET }
   | "}" { RIGHTBRACKET }
   | "(" { LEFTPAR }
   | ")" { RIGHTPAR }
   | "," { COMMA }
+  | "->" { ARROW }
   | ";"   { SEMICOLON }
   | "+" {PLUS}
   | "-" {MOINS}

@@ -7,10 +7,10 @@
 %token <int> INT
 %token <string> STRING
 %token <string> TAG
-%token <string> CLASS
+%token <string> IDENT CLASS
 %token PLUS MOINS DIV MULT
 %token H1 H2 H3 H4 H5 H6 DIV PAR BR IMG HLINK
-%token BR IMG LINK
+%token BR IMG LINK LIST ARROW
 %token SEMICOLON RIGHTBRACKET LEFTBRACKET LEFTPAR RIGHTPAR COMMA
 %left PLUS MINUS
 %left MULT DIV
@@ -35,7 +35,8 @@ expr:
   | IMG LEFTPAR STRING COMMA STRING RIGHTPAR { EImg("",$3,$5)}
   | TAG LEFTBRACKET expr_seq RIGHTBRACKET { ETag($1,"","",$3)}
   | TAG LEFTPAR class_list RIGHTPAR LEFTBRACKET expr_seq RIGHTBRACKET {ETag($1,$3,"",$6)}
-  | HLINK LEFTPAR STRING RIGHTPAR LEFTBRACKET expr_seq RIGHTBRACKET {EBR}
+  | HLINK LEFTPAR STRING RIGHTPAR LEFTBRACKET expr_seq RIGHTBRACKET {ELink($3,"", $6)}
+  | LIST list_items {EList("", $2)}
 
 expr_seq:
   | expr SEMICOLON expr_seq { Eseq($1,$3) }
@@ -54,3 +55,7 @@ tag :
 class_list :
   | CLASS class_list { String.concat " " [$1;$2] }
   | CLASS { $1 }
+
+list_items :
+  | ARROW LEFTBRACKET expr RIGHTBRACKET list_items {$3::$5}
+  |    {[]}
